@@ -29,3 +29,6 @@ sudo echo $group >> /etc/default/marcador
 sudo chown $user.$group /usr/local/bin/marcador.sh
 sudo chown $user.$group /etc/default/marcador
 sudo chown $user.$group /etc/init.d/marcador
+
+sudo chmod +x /usr/local/bin/marcador.sh
+sudo chmod +x /etc/init.d/marcador
