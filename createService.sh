@@ -23,8 +23,8 @@ sudo cp marcador /etc/init.d/marcador
 
 sudo touch /etc/default/marcador
 sudo chmod 777 /etc/default/marcador
-sudo echo $user >> /etc/default/marcador
-sudo echo $group >> /etc/default/marcador
+sudo echo "USER="$user >> /etc/default/marcador
+sudo echo "GROUP="$group >> /etc/default/marcador
 
 
 sudo chown $user.$group /usr/local/bin/marcador.sh
