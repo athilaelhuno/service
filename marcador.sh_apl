@@ -4,7 +4,8 @@
 
 case $1 in
 "start")
-	php /var/www/piloto2/script/download_files_nap.php > /var/www/piloto2/script/download_files_nap.log 2>&1 &
+	cd /var/www/piloto2/script/
+	php download_files_nap.php > download_files_nap.log 2>&1 &
 ;;
 "stop")
 	for i in `ps aux | grep download_files_nap | grep -v grep | awk '{print $2}'`; do kill -9  $i; done		
