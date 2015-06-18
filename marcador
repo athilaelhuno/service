@@ -1,0 +1,52 @@
+#! /bin/sh
+# /etc/init.d/callcenter
+# Create by: Enrique Fermin 28Apr2015
+# Updated by: Reynaldo Martinez 22May2015
+#
+### BEGIN INIT INFO
+# Provides:             marcador
+# Required-Start:    $network $syslog $named $local_fs $remote_fs
+# Required-Stop:     $network $syslog $named $local_fs $remote_fs
+# Should-Start:      dahdi misdn lcr wanrouter mysql postgresql
+# Should-Stop:       dahdi misdn lcr wanrouter mysql postgresql
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    marcador gysmo
+# Description:          marcador predictivo gysmo
+### END INIT INFO
+
+
+# Some things that run always
+touch /var/lock/marcador
+DAEMON=/usr/local/bin/marcador.sh
+NAME=marcador
+# Check if DAEMON binary exist
+[ -f $DAEMON ] || exit 0
+
+[ -f "/etc/default/$NAME" ] && . /etc/default/$NAME
+
+# Carry out specific functions when asked to by the system
+
+case "$1" in
+  start)
+    echo "Starting callcenter Services "
+    # start-stop-daemon --start --oknodo -u $USER -g $GROUP --exec $DAEMON start
+    start-stop-daemon --start --oknodo --chuid $USER:$GROUP --exec $DAEMON start
+    ;;
+  stop)
+    echo "Stoping callcenter Services "
+    #start-stop-daemon --stop --oknodo -u $CALL_USER -g $CALL_GROUP --exec $DAEMON stop
+    $DAEMON stop
+    ;;
+  status)
+    #start-stop-daemon --stop --oknodo -u $CALL_USER -g $CALL_GROUP --exec $DAEMON status
+    $DAEMON status
+    ;;
+  *)
+    echo "Usage: /etc/init.d/blah {start|stop|status}"
+    exit 1
+    ;;
+esac
+
+exit 0
+
